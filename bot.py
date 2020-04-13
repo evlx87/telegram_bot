@@ -11,6 +11,9 @@ with open('config.json', 'r', encoding='utf-8') as f:
 bot = telebot.TeleBot(bot_api['token'])
 apihelper.proxy = {'https': bot_api['proxy_url']}
 
+"""На случай непонятного запроса"""
+error_message = "В следующих версиях я смогу научиться отвечать на этот запрос"
+
 
 @bot.message_handler(commands=['start'])
 def start_message(message):
@@ -24,7 +27,7 @@ def start_message(message):
 def help_message(message):
     """Функция диалога с пользователем по различным сценариям в зависимости"""
     if message.text == "/help":
-        bot.send_message(message.from_user.id, "Напиши привет")
+        bot.send_message(message.from_user.id, error_message)
     else:
         bot.send_message(message.from_user.id, "Я тебя не понимаю. Напиши /help.")
 
